@@ -10,14 +10,14 @@ spec:
         - $el: 'p'
           attrs:
             style: { padding: '4px 0', color: 'red' }
-          children: "若启用后不生效，请关闭其他评论插件，例如「评论组件」。"
+          children: "若启用后不生效：Halo 2.17 及以上请到「扩展配置 - 评论组件」中选中 Twikoo；或关闭其他评论插件，例如「评论组件」。"
 
         - $formkit: text
           name: jsUrl
           label: 前端脚本地址
-          value: https://cdn.staticfile.org/twikoo/1.6.34/twikoo.all.min.js
-          placeholder: https://cdn.staticfile.org/twikoo/1.6.34/twikoo.all.min.js
-          help: "请确保与后端 Twikoo 版本匹配"
+          value: https://cdn.jsdelivr.net/npm/twikoo@1.7.19/dist/twikoo.min.js
+          placeholder: https://cdn.jsdelivr.net/npm/twikoo@1.7.19/dist/twikoo.min.js
+          help: "请确保与后端 Twikoo 版本匹配。若 envId 为腾讯云环境 ID，需改用内置 cloudbase 的完整版 twikoo.all.min.js；envId 为访问地址（Vercel / 自托管）时可用默认的精简版 twikoo.min.js"
           validation: "required|url"
 
         - $formkit: text

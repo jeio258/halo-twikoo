@@ -6,18 +6,18 @@ metadata:
   name: twikoo
 spec:
   enabled: true
-  requires: ">=2.11.0"
+  requires: ">=2.25.0"
   author:
-    name: Chenhe
-    website: https://chenhe.me
+    name: 临渊羡鱼
+    website: https://github.com/jeio258
   logo: logo.png
   settingName: twikoo-settings
   configMapName: twikoo-configMap
-  homepage: https://github.com/ichenhe/halo-twikoo#readme
-  repo: https://github.com/ichenhe/halo-twikoo
-  issues: https://github.com/ichenhe/halo-twikoo/issues
+  homepage: https://github.com/jeio258/halo-twikoo#readme
+  repo: https://github.com/jeio258/halo-twikoo
+  issues: https://github.com/jeio258/halo-twikoo/issues
   displayName: "Twikoo"
-  description: "集成 Twikoo 评论系统到 Halo"
+  description: "集成 Twikoo 评论系统到 Halo（原作者 Chenhe，https://chenhe.me）"
   license:
     - name: "GPL-3.0"
-      url: "https://github.com/ichenhe/halo-twikoo/blob/main/LICENSE"
+      url: "https://github.com/jeio258/halo-twikoo/blob/main/LICENSE"

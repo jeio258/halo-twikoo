@@ -1,29 +1,30 @@
-import java.util.concurrent.TimeUnit
-
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "8.0.1"
-    id "run.halo.plugin.devtools" version "0.0.7"
+    id "run.halo.plugin.devtools" version "0.6.2"
 }
 
 group 'me.chenhe.halo'
-version = extractVersionFromGit()
+// 版本固定为 1.0.3。
+// 若需跟随 git tag 自动推导，可改用 halo 插件模板自带的 extractVersionFromGit()。
+version = '1.0.3'
 
-sourceCompatibility = JavaVersion.VERSION_17
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
-    maven { url 'https://s01.oss.sonatype.org/content/repositories/releases' }
-    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
-    implementation platform('run.halo.tools.platform:plugin:2.11.0-SNAPSHOT')
+    implementation platform('run.halo.tools.platform:plugin:2.25.0')
     compileOnly 'run.halo.app:api'
 
     testImplementation 'run.halo.app:api'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
@@ -32,37 +33,9 @@ test {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
+    options.release = 21
 }
 
 halo {
-    version = '2.11'
-}
-
-tasks.register('version') {
-    doLast {
-        println(extractVersionFromGit())
-    }
-}
-
-String extractVersionFromGit() {
-    def process = "git describe --tags --match=v[0-9]*.[0-9]*.[0-9]* --long --abbrev=7".execute()
-    def timeout = !process.waitFor(10, TimeUnit.SECONDS)
-    if (timeout || process.exitValue() != 0) {
-        // failed to find matched tag
-        logger.warn("Could not find a valid version tag through git, use default version.")
-        return "0.0.1-SNAPSHOT"
-    }
-    def outputs = process.text =~ /v(\d+\.\d+.\d+)-(\d+)-(\w+)/
-    if (!outputs) {
-        logger.warn("Malformed version tag , use default version.")
-        return "0.0.1-SNAPSHOT"
-    }
-    var sb = new StringBuilder(30)
-    sb.append(outputs.group(1))
-    if (Integer.parseInt(outputs.group(2)) != 0) {
-        sb.append('-')
-        sb.append(outputs.group(3))
-        sb.append('-SNAPSHOT')
-    }
-    return sb.toString()
+    version = '2.25.0'
 }
